@@ -14,7 +14,12 @@ fetch(cityUrl)
         weatherEl.textContent = data.name;
 
         var d = new Date();
-        var strDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+        var strDate = "(" + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() + ")";
         console.log(strDate);
+        weatherEl.append(" ");
+        weatherEl.append(strDate);
+
+        var tempEl = document.querySelector('#temp');
+        console.log(tempEl);
         
     })
