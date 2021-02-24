@@ -22,7 +22,7 @@ button.addEventListener('click', function (e) {
     var city = $('#form1').val();
     var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
     handleFetch(userCity);
-    getData();
+    getData(data);
 })
 
 //fetch(userCity)
@@ -32,7 +32,7 @@ button.addEventListener('click', function (e) {
 //.then(function (data) {
 //Display City Name
 //console.log(data);
-function getData() {
+function getData(data) {
     var weatherEl = document.querySelector('#city_name');
     weatherEl.textContent = data.name;
 
