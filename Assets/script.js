@@ -4,15 +4,13 @@ var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=charlotte&appid
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat=35.2271&lon=-80.8431&appid=06bf71c585fc92aee380df18e65dac7d';
 var fiveDay = 'http://api.openweathermap.org/data/2.5/forecast?q=charlotte&appid=06bf71c585fc92aee380df18e65dac7d';
 var city = "";
-//var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
-//console.log(userCity);
+var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
+console.log(userCity);
 
 var button = document.querySelector('#button');
 
 button.addEventListener('click', function(){
     city = $('#form1').val();
-    userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
-    console.log(userCity);
 
 })
 
