@@ -85,17 +85,17 @@ function getFiveDay(data) {
             for (var i = 0; i < 5; i++) {
 
                 var dateEl = document.querySelector('#date');
-                dateEl.textContent = data.list[0].dt_txt;
+                dateEl.textContent = data.list[i].dt_txt;
 
                 var iconEl = document.querySelector('#icon');
-                iconEl.textContent = data.list[0].weather[0].icon;
+                iconEl.textContent = data.list[i].weather[0].icon;
 
                 var tempEl = document.querySelector('#temp');
-                tempEl.textContent = data.list[0].main.temp; //returns 298.35
+                tempEl.textContent = data.list[i].main.temp; //returns 298.35
                 console.log(data.list[0].main.temp);
 
                 var humidityEl = document.querySelector('#humidity');
-                humidityEl.textContent = data.list[0].main.humidity;
+                humidityEl.textContent = data.list[i].main.humidity;
                 //console.log(data.list[0].main.humidity); returns 44
             }
 
