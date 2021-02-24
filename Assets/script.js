@@ -3,6 +3,14 @@ var fiveDay = 'http://api.openweathermap.org/data/2.5/forecast?q=charlotte&appid
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
 
+const fetcher = (url) => {
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        return res
+      })
+  };
+
 
 function handleFetch(url) {
     return fetch(url)
@@ -11,7 +19,7 @@ function handleFetch(url) {
         })
         .then(function (data) {
             getData(data);
-            
+            getUvIndex(data);
         })
         
 }
@@ -52,11 +60,21 @@ function getData(data) {
 
 //Get UV Index Function
 function getUvIndex(data){
-    console.log(data);
-    var long = data.coord.lon;
-    var lat = data.coord.lat;
-    var uvIndexEl = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${long}&appid=06bf71c585fc92aee380df18e65dac7d`;
+    return fetch(data)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data){
+        getUvIndex(data);
+        console.log(data);
+    })
 }
+    //console.log(data);
+    //var long = data.coord.lon;
+    //var lat = data.coord.lat;
+    //var uvIndexEl = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${long}&appid=06bf71c585fc92aee380df18e65dac7d`;
+
+
 
 
 //Start on Five Day Forecast
