@@ -13,8 +13,11 @@ function handleFetch(url) {
             return response.json();
         })
         .then(function (data) {
+            getData(data);
+            getUV(uvIndex);
             console.log(data);
         })
+        
 }
 
 button.addEventListener('click', function (e) {
@@ -22,7 +25,6 @@ button.addEventListener('click', function (e) {
     var city = $('#form1').val();
     var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
     handleFetch(userCity);
-    getData(data);
 })
 
 //fetch(userCity)
@@ -51,17 +53,24 @@ function getData(data) {
     windEl.append(data.wind.speed);
 }
 
-fetch(uvIndex)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
+//fetch(uvIndex)
+  //  .then(function (response) {
+    //    return response.json();
+    //})
+    //.then(function (data) {
         //Display City Name
-        console.log(data);
+      //  console.log(data);
+        //var uvIndexEl = document.querySelector('#uvi');
+        //console.log(uvIndexEl);
+        //uvIndexEl.append(data.value);
+    //})
+
+    function getUV(uvIndex){
+        console.log(uvIndex);
         var uvIndexEl = document.querySelector('#uvi');
         console.log(uvIndexEl);
-        uvIndexEl.append(data.value);
-    })
+        uvIndexEl.append(uvIndex.value);
+    }
 
 //Start on Five Day Forecast
 
