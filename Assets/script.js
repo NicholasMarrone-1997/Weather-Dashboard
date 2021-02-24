@@ -20,8 +20,8 @@ function handleFetch(url) {
         .then(function (data) {
             getData(data);
             getUvIndex(data);
+            getFiveDay(data);
         })
-
 }
 
 button.addEventListener('click', function (e) {
@@ -31,13 +31,6 @@ button.addEventListener('click', function (e) {
     handleFetch(userCity);
 })
 
-//fetch(userCity)
-// .then(function (response) {
-// return response.json();
-//})
-//.then(function (data) {
-//Display City Name
-//console.log(data);
 function getData(data) {
     console.log(data);
     var weatherEl = document.querySelector('#city_name');
@@ -76,5 +69,30 @@ function getUvIndex(data) {
         })
 }
 
-
 //Start on Five Day Forecast
+
+function getFiveDay(data) {
+    var city = $('#form1').val();
+    var fiveDayEl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
+    console.log(fiveDayEl);
+    return fetch(fiveDayEl)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+
+            var dateEl = document.querySelector('#date');
+            dateEl.textContent = data.list.dt_txt;
+
+            //var iconEl = document.querySelector('#icon');
+            //iconEl.textContent = data.list.weather.icon;
+
+            //var tempEl = document.querySelector('#temp');
+            //tempEl.textContent = data.list.main.temp;
+
+            //var humidityEl = document.querySelector('#humidity');
+            //humidityEl.textContent = data.list.main.humidity;
+
+        })
+} 
