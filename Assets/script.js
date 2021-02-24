@@ -70,6 +70,9 @@ function getUvIndex(data) {
         })
         .then(function (data) {
             console.log(data);
+
+            var uvEl = document.querySelector('#uvi');
+            uvEl.textContent = data.value;
         })
 }
 
