@@ -9,9 +9,9 @@ console.log(userCity);
 var button = document.querySelector('#button');
 
 button.addEventListener('click', function(){
-    city = $('#form1').val();
-    var city = "";
+    var city = $('#form1').val();
     var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
+    console.log(userCity);
 })
 
 fetch(userCity)
