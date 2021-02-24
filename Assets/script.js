@@ -5,11 +5,11 @@ var button = document.querySelector('#button');
 
 const fetcher = (url) => {
     fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        return res
-      })
-  };
+        .then(res => res.json())
+        .then(res => {
+            return res
+        })
+};
 
 
 function handleFetch(url) {
@@ -21,7 +21,7 @@ function handleFetch(url) {
             getData(data);
             getUvIndex(data);
         })
-        
+
 }
 
 button.addEventListener('click', function (e) {
@@ -59,23 +59,19 @@ function getData(data) {
 }
 
 //Get UV Index Function
-function getUvIndex(data){
-    return fetch(data)
-    .then(function (response){
-        return response.json();
-    })
-    .then(function (data){
-        getUvIndex(data);
-        console.log(data);
-    })
+function getUvIndex(data) {
+    var long = data.coord.lon;
+    var lat = data.coord.lat;
+    var uvIndexEl = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${long}&appid=06bf71c585fc92aee380df18e65dac7d`;
+
+    return fetch(uvIndexEl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        })
 }
-    //console.log(data);
-    //var long = data.coord.lon;
-    //var lat = data.coord.lat;
-    //var uvIndexEl = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${long}&appid=06bf71c585fc92aee380df18e65dac7d`;
-
-
 
 
 //Start on Five Day Forecast
-
