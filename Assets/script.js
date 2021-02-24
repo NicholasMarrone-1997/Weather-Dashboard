@@ -76,23 +76,28 @@ function getFiveDay(data) {
     var fiveDayEl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
     console.log(fiveDayEl);
     return fetch(fiveDayEl)
-        .then(function (response){
+        .then(function (response) {
             return response.json();
         })
-        .then(function(data){
+        .then(function (data) {
             console.log(data);
 
-            var dateEl = document.querySelector('#date');
-            dateEl.textContent = data.list.dt_txt;
+            for (var i = 0; i < 5; i++) {
 
-            //var iconEl = document.querySelector('#icon');
-            //iconEl.textContent = data.list.weather.icon;
+                var dateEl = document.querySelector('#date');
+                dateEl.textContent = data.list[0].dt_txt;
 
-            //var tempEl = document.querySelector('#temp');
-            //tempEl.textContent = data.list.main.temp;
+                var iconEl = document.querySelector('#icon');
+                iconEl.textContent = data.list[0].weather[0].icon;
 
-            //var humidityEl = document.querySelector('#humidity');
-            //humidityEl.textContent = data.list.main.humidity;
+                var tempEl = document.querySelector('#temp');
+                tempEl.textContent = data.list[0].main.temp; //returns 298.35
+                console.log(data.list[0].main.temp);
+
+                var humidityEl = document.querySelector('#humidity');
+                humidityEl.textContent = data.list[0].main.humidity;
+                //console.log(data.list[0].main.humidity); returns 44
+            }
 
         })
-} 
+}
