@@ -3,6 +3,8 @@ var fiveDay = 'http://api.openweathermap.org/data/2.5/forecast?q=charlotte&appid
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
 
+
+//Created a helper function that handles the fetch requests
 const fetcher = (url) => {
     fetch(url)
         .then(res => res.json())
@@ -11,7 +13,7 @@ const fetcher = (url) => {
         })
 };
 
-
+//Created a function that fetches the urls and calls the function
 function handleFetch(url) {
     return fetch(url)
         .then(function (response) {
@@ -24,6 +26,7 @@ function handleFetch(url) {
         })
 }
 
+//Created event listener for button click 
 button.addEventListener('click', function (e) {
     e.preventDefault();
     var city = $('#form1').val();
@@ -31,6 +34,7 @@ button.addEventListener('click', function (e) {
     handleFetch(userCity);
 })
 
+//Created function for displaying data to dashboard
 function getData(data) {
     console.log(data);
     var weatherEl = document.querySelector('#city_name');
@@ -51,7 +55,7 @@ function getData(data) {
     windEl.append(data.wind.speed);
 }
 
-//Get UV Index Function
+//Created function to get uv index to display to dashboard
 function getUvIndex(data) {
     var long = data.coord.lon;
     var lat = data.coord.lat;
@@ -69,8 +73,7 @@ function getUvIndex(data) {
         })
 }
 
-//Start on Five Day Forecast
-
+//Created function to get Five Day Forecast to display on cards
 function getFiveDay(data) {
     var city = $('#form1').val();
     var fiveDayEl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
@@ -91,8 +94,8 @@ function getFiveDay(data) {
                 iconEl.textContent = data.list[i].weather[0].icon;
 
                 var tempEl = document.querySelector('#temp');
-                tempEl.textContent = data.list[i].main.temp; //returns 298.35
-                console.log(data.list[0].main.temp);
+                tempEl.textContent = data.list[i].main.temp; 
+                console.log(data.list[i].main.temp); //returns next 5 temperatures
 
                 var humidityEl = document.querySelector('#humidity');
                 humidityEl.textContent = data.list[i].main.humidity;
