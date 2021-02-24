@@ -1,9 +1,6 @@
 // 06bf71c585fc92aee380df18e65dac7d
-
-var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=charlotte&appid=06bf71c585fc92aee380df18e65dac7d';
-var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat=35.2271&lon=-80.8431&appid=06bf71c585fc92aee380df18e65dac7d';
 var fiveDay = 'http://api.openweathermap.org/data/2.5/forecast?q=charlotte&appid=06bf71c585fc92aee380df18e65dac7d';
-
+var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
 
 
@@ -14,8 +11,7 @@ function handleFetch(url) {
         })
         .then(function (data) {
             getData(data);
-            getUV(uvIndex);
-            console.log(data);
+            
         })
         
 }
@@ -35,6 +31,7 @@ button.addEventListener('click', function (e) {
 //Display City Name
 //console.log(data);
 function getData(data) {
+    console.log(data);
     var weatherEl = document.querySelector('#city_name');
     weatherEl.textContent = data.name;
 
@@ -53,33 +50,14 @@ function getData(data) {
     windEl.append(data.wind.speed);
 }
 
-//fetch(uvIndex)
-  //  .then(function (response) {
-    //    return response.json();
-    //})
-    //.then(function (data) {
-        //Display City Name
-      //  console.log(data);
-        //var uvIndexEl = document.querySelector('#uvi');
-        //console.log(uvIndexEl);
-        //uvIndexEl.append(data.value);
-    //})
+//Get UV Index Function
+function getUvIndex(data){
+    console.log(data);
+    var long = data.coord.lon;
+    var lat = data.coord.lat;
+    var uvIndexEl = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${long}&appid=06bf71c585fc92aee380df18e65dac7d`;
+}
 
-    function getUV(uvIndex){
-        console.log(uvIndex);
-        var uvIndexEl = document.querySelector('#uvi');
-        console.log(uvIndexEl);
-        uvIndexEl.append(uvIndex.value);
-    }
 
 //Start on Five Day Forecast
 
-fetch(fiveDay)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        //Display City Name
-        console.log(data);
-
-    })
