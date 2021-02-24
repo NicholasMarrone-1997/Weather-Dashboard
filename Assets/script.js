@@ -42,5 +42,7 @@ fetch(cityUrl)
     .then(function (data) {
         //Display City Name
         console.log(data);
-        
+        var uvIndexEl = document.querySelector('#uvi');
+        console.log(uvIndexEl);
+        uvIndexEl.append(data.value);
     })
