@@ -1,5 +1,5 @@
 // 06bf71c585fc92aee380df18e65dac7d
-var fiveDay = 'http://api.openweathermap.org/data/2.5/forecast?q=charlotte&appid=06bf71c585fc92aee380df18e65dac7d';
+
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
 
@@ -76,7 +76,9 @@ function getUvIndex(data) {
 //Created function to get Five Day Forecast to display on cards
 function getFiveDay(data) {
     var city = $('#form1').val();
-    var fiveDayEl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
+    var long = data.coord.lon;
+    var lat = data.coord.lat;
+    var fiveDayEl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=current,minutely,hourly,alerts&appid=06bf71c585fc92aee380df18e65dac7d`;
     console.log(fiveDayEl);
     return fetch(fiveDayEl)
         .then(function (response) {
@@ -84,23 +86,13 @@ function getFiveDay(data) {
         })
         .then(function (data) {
             console.log(data);
+            var forecastEl = document.getElementsByClassName("forecast");
 
-            for (var i = 0; i < 5; i++) {
-
-                var dateEl = document.querySelector('#date');
-                dateEl.textContent = data.list[i].dt_txt;
-
-                var iconEl = document.querySelector('#icon');
-                iconEl.textContent = data.list[i].weather[0].icon;
-
-                var tempEl = document.querySelector('#temp');
-                tempEl.textContent = data.list[i].main.temp; 
-                console.log(data.list[i].main.temp); //returns next 5 temperatures
-
-                var humidityEl = document.querySelector('#humidity');
-                humidityEl.textContent = data.list[i].main.humidity;
-                //console.log(data.list[0].main.humidity); returns 44
+            for(var i = 0; i < forecastEl.length; i++){
+                // console.log(forecastEl[i].children);
+                forecastEl[i].children[0].innerText = "Date: " + data.daily[i].dt;
+                forecastEl[i].children[2].innerText = "Temp: " + data.daily[i].temp[i];
+                forecastEl[i].children[3].innerText = "Humidity: " + data.daily[i].humidity;
             }
-
         })
 }
