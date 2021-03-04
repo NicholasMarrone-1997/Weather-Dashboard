@@ -2,6 +2,7 @@
 
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
+var cities = [];
 
 //Created a function that fetches the urls and calls the function
 function handleFetch(url) {
@@ -22,27 +23,47 @@ button.addEventListener('click', function (e) {
     var city = $('#form1').val();
     var userCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=06bf71c585fc92aee380df18e65dac7d`;
     handleFetch(userCity);
+
+    cities.push(city); //update city array before storing in local storage
+    localStorage.setItem("cities", JSON.stringify(cities));
+    console.log(localStorage.getItem("cities"));
+    
+    var listSearch = document.getElementById("list");
+
+    listSearch.innerHTML = "";
+
+    var test = JSON.parse(localStorage.getItem("cities"))
+
+
+    for(let i = 0; i < test.length; i++){
+        var list = document.createElement("li");
+        list.classList.add("list-group-item");
+        list.append(test[i]);
+        console.log(list)
+        listSearch.appendChild(list);
+    }
 })
 
 //Created function for displaying data to dashboard
 function getData(data) {
     console.log(data);
     var weatherEl = document.querySelector('#city_name');
-    weatherEl.textContent = data.name;
+    weatherEl.innerText = data.name;
 
     var d = new Date();
     var strDate = "(" + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() + ")";
-    weatherEl.append(" ");
-    weatherEl.append(strDate);
+    weatherEl.innerText = " ";
+    weatherEl.innerText = strDate;
 
     var tempEl = document.querySelector('#temp');
-    tempEl.append(data.main.temp);
+    tempEl.innerText = "Temperature: " + data.main.temp;
+
 
     var humEl = document.querySelector('#hum');
-    humEl.append(data.main.humidity);
+    humEl.innerText = "Humidity: " + data.main.humidity;
 
     var windEl = document.querySelector('#wind');
-    windEl.append(data.wind.speed);
+    windEl.innerText = "Wind Speed: " + data.wind.speed;
 }
 
 //Created function to get uv index to display to dashboard
@@ -60,7 +81,7 @@ function getUvIndex(data) {
 
             var uvEl = document.querySelector('#uvi');
             var uvNumber = data.value;
-            uvEl.append(uvNumber);
+            uvEl.innerText = "UV Index: " + uvNumber;
             console.log(uvNumber);
 
             if (uvNumber > 7) {
