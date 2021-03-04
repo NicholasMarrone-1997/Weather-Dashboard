@@ -91,7 +91,7 @@ function getFiveDay(data) {
             for (var i = 0; i < forecastEl.length; i++) {
                 // console.log(forecastEl[i].children);
                 forecastEl[i].children[0].innerText = "Date: " + data.daily[i].dt;
-                forecastEl[i].children[1].innerText = "Icon: " + "http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + " .png";
+                forecastEl[i].children[1].innerHTML = '<img src="http://openweathermap.org/img/w/' + data.daily[i].weather[0].icon + '.png" />'
                 forecastEl[i].children[2].innerText = "Temp: " + data.daily[i].temp.day;
                 forecastEl[i].children[3].innerText = "Humidity: " + data.daily[i].humidity;
             }
