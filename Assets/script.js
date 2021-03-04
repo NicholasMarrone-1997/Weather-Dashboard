@@ -59,9 +59,17 @@ function getUvIndex(data) {
             console.log(data);
 
             var uvEl = document.querySelector('#uvi');
-            uvEl.textContent = data.value;
-            console.log(uvEl.textContent); //Returns a number
+            var uvNumber = data.value;
+            uvEl.append(uvNumber);
+            console.log(uvNumber);
 
+            if (uvNumber > 7) {
+                $('#uvi').css('color', 'red');
+            } else if (uvNumber === 4 || uvNumber === 4.1 || uvNumber === 4.2 || uvNumber === 4.3 || uvNumber === 4.4 || uvNumber === 4.5 || uvNumber === 4.6 || uvNumber === 4.7 || uvNumber === 4.8 || uvNumber === 4.9 || uvNumber === 5 || uvNumber === 5.1 || uvNumber === 5.2 || uvNumber === 5.3 || uvNumber === 5.4 || uvNumber === 5.5 || uvNumber === 5.6 || uvNumber === 5.7 || uvNumber === 5.8 || uvNumber === 5.9 || uvNumber === 6 || uvNumber === 6.1 || uvNumber === 6.2 || uvNumber === 6.3 || uvNumber === 6.4 || uvNumber === 6.5 || uvNumber === 6.6 || uvNumber === 6.7 || uvNumber === 6.8 || uvNumber === 6.9){
+                $('#uvi').css('color', 'yellow');
+            } else{
+                $('#uvi').css('color', 'green');
+            }
         })
 }
 
@@ -80,10 +88,10 @@ function getFiveDay(data) {
             console.log(data);
             var forecastEl = document.getElementsByClassName("forecast");
 
-            for(var i = 0; i < forecastEl.length; i++){
+            for (var i = 0; i < forecastEl.length; i++) {
                 // console.log(forecastEl[i].children);
                 forecastEl[i].children[0].innerText = "Date: " + data.daily[i].dt;
-                forecastEl[i].children[1].innerText = "Icon: " + data.daily[i].weather[0].icon;
+                forecastEl[i].children[1].innerText = "Icon: " + "http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + " .png";
                 forecastEl[i].children[2].innerText = "Temp: " + data.daily[i].temp.day;
                 forecastEl[i].children[3].innerText = "Humidity: " + data.daily[i].humidity;
             }
