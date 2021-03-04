@@ -3,16 +3,6 @@
 var uvIndex = 'http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=06bf71c585fc92aee380df18e65dac7d'
 var button = document.querySelector('#button');
 
-
-//Created a helper function that handles the fetch requests
-const fetcher = (url) => {
-    fetch(url)
-        .then(res => res.json())
-        .then(res => {
-            return res
-        })
-};
-
 //Created a function that fetches the urls and calls the function
 function handleFetch(url) {
     return fetch(url)
@@ -70,6 +60,8 @@ function getUvIndex(data) {
 
             var uvEl = document.querySelector('#uvi');
             uvEl.textContent = data.value;
+            console.log(uvEl.textContent); //Returns a number
+
         })
 }
 
